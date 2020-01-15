@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Find the Route</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Sofia"
+      rel="stylesheet"
+    />
+    <script src="./index.js"></script>
+
+    <style>
+      html,
+      body {
+        max-width: 100%;
+        overflow-x: hidden;
+      }
+
+      h1 {
+        font-family: "Open Sans";
+        font-size: 23px;
+        font-style: normal;
+        font-variant: normal;
+        font-weight: 700;
+        line-height: 23px;
+      }
+      h3 {
+        font-family: "Open Sans";
+        font-size: 18px;
+        font-style: normal;
+        font-variant: normal;
+        font-weight: 700;
+        line-height: 19.8px;
+      }
+      p {
+        font-family: "Open Sans";
+        font-size: 16px;
+        font-style: normal;
+        font-variant: normal;
+        font-weight: 400;
+        line-height: 22.8571px;
+      }
+      blockquote {
+        font-family: "Open Sans";
+        font-size: 17px;
+        font-style: normal;
+        font-variant: normal;
+        font-weight: 400;
+        line-height: 23px;
+      }
+      pre {
+        font-family: "Open Sans";
+        font-size: 11px;
+        font-style: normal;
+        font-variant: normal;
+        font-weight: 400;
+        line-height: 23px;
+      }
+
+      /* Remove the navbar's default margin-bottom and rounded borders */
+      .navbar {
+        margin-bottom: 10px;
+        border-radius: 0px;
+      }
+
+      .fsize {
+        font-size: 16px;
+      }
+
+      /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+      .row.content {
+        height: 100%;
+        width: 100%;
+      }
+
+      /* Set gray background color and 100% height */
+      .sidenav {
+        padding-top: 20px;
+        margin-right: 15px;
+        margin-left: 20px;
+        width: 325px;
+        background-color: #f1f1f1;
+        height: 100%;
+      }
+
+      /* Set black background color, white text and some padding */
+      footer {
+        background-color: #555;
+        color: white;
+        padding: 15px;
+      }
+
+      /* On small screens, set height to 'auto' for sidenav and grid */
+      @media screen and (max-width: 250px) {
+        .sidenav {
+          height: auto;
+          padding: 20px;
+        }
+        .row.content {
+          height: auto;
+          width: 100%;
+        }
+      }
+
+      .button {
+        padding: 10px 10px;
+        font-size: 20px;
+        text-align: center;
+
+        cursor: pointer;
+        outline: none;
+        color: #fff;
+        background-color: #4caf50;
+        border: none;
+        border-radius: 8px;
+        box-shadow: 0 4px #999;
+      }
+
+      .button:hover {
+        background-color: #3e8e41;
+      }
+
+      .button:active {
+        background-color: #3e8e41;
+        box-shadow: 0 5px #666;
+        transform: translateY(4px);
+      }
+      /* /////////////////////////////////////////////////// */
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      td,
+      th {
+        border: 1px solid #ffffff;
+        padding: 10px;
+        text-align: center;
+      }
+      th {
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+      tr:hover {
+        background-color: #08550b;
+        color: white;
+      }
+
+      /* ///////////////////////////////////////////////// */
+    </style>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button
+            type="button"
+            class="navbar-toggle"
+            data-toggle="collapse"
+            data-target="#myNavbar"
+          >
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#" style="margin-left: 15px;"
+            >Travel my Map</a
+          >
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <!-- <li><a href="#">About</a></li> -->
+            <li>
+              <a
+                href="https://en.wikipedia.org/wiki/Minimum_spanning_tree"
+                target="_blank"
+                >Know more</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://developers.google.com/maps/documentation/directions/start"
+                target="_blank"
+                >API used</a
+              >
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a
+                href="https://github.com/th-10/distance-matrix-api-google-Kruskal"
+                target="_blank"
+                ><span class="fa fa-github" style="font-size:20px"></span> View
+                Code</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid text-center" style="margin-top: 60px;">
+      <div class="row content">
+        <div class="col-sm-6 sidenav container-fluid">
+          <!-- <p><a href="#">Link</a></p>
+          <p><a href="#">Link</a></p>
+          <p><a href="#">Link</a></p> -->
+
+          <img
+            src="./images/graph.png"
+            alt="Responsive image"
+            class="img-fluid"
+            width="100%"
+            height="230px"
+          />
+          <br />
+          <br />
+          <div class="fsize">
+            <p>
+              Using Google Map API find the shortest path for your journey..
+            </p>
+          </div>
+
+          <button
+            id="buttonSent"
+            onclick="operation()"
+            class="button align-bottom"
+            style="margin-top: 200px;"
+          >
+            Find Route
+          </button>
+          <br />
+          <br />
+          <div id="loadingmessage" style="display:none">
+            <img src="./images/5.gif" />
+          </div>
+
+          <p id="scroll" align="center"></p>
+        </div>
+        <div class="col-sm-5 text-left">
+          <h2>Welcome</h2>
+          <div class="fsize">
+            <p>
+              Want to tarvel cities and get the shortest path of your
+              journey!!!<br /><br />
+              Find your journey using "Travel my Map" web-app, just type in the
+              cities you want to travel.<br />
+              You can also exclude the path between any 2 cities, which you
+              don't wish to travel, just type the pair of cities (cityA-cityB).
+            </p>
+          </div>
+          <br />
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-6" width="100%">
+                <h3>Enter cities name</h3>
+
+                <textarea
+                  id="input1"
+                  rows="20"
+                  cols="40"
+                  spellcheck="false"
+                  placeholder="*Type each city name in new line."
+                  required
+                ></textarea>
+              </div>
+              <div class="col-sm-6 other" width="100%">
+                <h3>Enter pair of cities <br /></h3>
+
+                <textarea
+                  id="input2"
+                  rows="20"
+                  cols="40"
+                  spellcheck="false"
+                  placeholder="*For which path is to be excluded.
+Format-
+cityA-cityB
+cityC-cityD
+                  "
+                ></textarea>
+              </div>
+            </div>
+          </div>
+          <br />
+          <br />
+          <div style="margin:0 auto; overflow-x:auto;">
+            <table>
+              <thread>
+                <tr>
+                  <th>City A</th>
+                  <th>City B</th>
+                  <th>Distance</th>
+                </tr>
+              </thread>
+
+              <tbody id="tableData"></tbody>
+            </table>
+            <br />
+            <p id="distance" style="text-align: center; font-size: medium;"></p>
+          </div>
+        </div>
+
+        <!-- <div class="col-sm-2 sidenav">
+          <div class="well">
+            <p>ADS</p>
+          </div>
+          <div class="well">
+            <p>ADS</p>
+          </div>
+        </div> -->
+      </div>
+    </div>
+
+    <!-- <footer class="container-fluid text-center">
+      <p>Footer Text</p>
+    </footer> -->
+  </body>
+</html>
