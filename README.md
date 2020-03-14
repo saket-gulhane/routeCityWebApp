@@ -2,4 +2,4 @@
  Demo link: "https://route-city-app.herokuapp.com/"
  <br/>
  <br/>
- <img src="./demoPic.png" />
+ <img src="./demoPic1.png" />
